@@ -1,0 +1,86 @@
+
+# EXPERIMENT 1: EXPLORATORY DATA ANALYSIS (EDA)
+
+## AIM
+Using the Iris dataset, compute descriptive statistics,
+check missing values, and plot a histogram and correlation matrix.
+
+## REQUIRED LIBRARIES
+- pandas
+- matplotlib
+- seaborn
+- scikit-learn
+
+## STEP 1: INSTALL LIBRARIES IN CMD
+
+py -m pip install pandas matplotlib seaborn scikit-learn
+
+## STEP 2: CREATE PYTHON FILE
+
+notepad eda_iris.py
+
+Save the following code in the file:
+
+## PYTHON CODE
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import load_iris
+
+# Load Iris dataset
+iris = load_iris()
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+
+# Display first five rows
+print("First 5 Rows:")
+print(df.head())
+
+# Descriptive statistics
+print("\nDescriptive Statistics:")
+print(df.describe())
+
+# Check missing values
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+# Plot histogram
+plt.hist(df["sepal length (cm)"], bins=10, edgecolor="black")
+plt.title("Histogram of Sepal Length")
+plt.xlabel("Sepal Length")
+plt.ylabel("Frequency")
+plt.show()
+
+# Plot correlation matrix
+sns.heatmap(df.corr(), annot=True, cmap="coolwarm")
+plt.title("Correlation Matrix")
+plt.show()
+```
+
+## STEP 3: EXECUTE THE PROGRAM IN CMD
+
+py eda_iris.py
+
+## EXPECTED OUTPUT
+
+1. First five rows of the Iris dataset.
+2. Descriptive statistics:
+   - Count
+   - Mean
+   - Standard deviation
+   - Minimum
+   - Maximum
+   - Quartiles
+3. Missing value count (all zero).
+4. Histogram of sepal length.
+5. Correlation matrix heatmap.
+
+NOTE:
+Close the histogram window to display the correlation matrix.
+
+## RESULT
+
+Successfully performed exploratory data analysis on the
+Iris dataset using descriptive statistics, missing value
+analysis, a histogram, and a correlation matrix.
