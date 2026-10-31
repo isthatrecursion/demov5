@@ -1,0 +1,109 @@
+
+# EXPERIMENT 3: SAMPLING METHODS
+
+## AIM
+Perform simple random sampling and stratified sampling
+on a dataset and compare the resulting samples.
+
+## REQUIRED LIBRARIES
+- pandas
+- scikit-learn
+
+## STEP 1: INSTALL LIBRARIES IN CMD
+
+py -m pip install pandas scikit-learn
+
+## STEP 2: CREATE PYTHON FILE
+
+notepad sampling.py
+
+Save the following code in the file:
+
+## PYTHON CODE
+
+```python
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+# Load Iris dataset
+iris = load_iris()
+
+df = pd.DataFrame(
+    iris.data,
+    columns=iris.feature_names
+)
+
+df["Species"] = iris.target_names[iris.target]
+
+# Original dataset distribution
+print("Original Dataset:")
+print(df["Species"].value_counts())
+
+# Simple random sampling
+random_sample = df.sample(n=30, random_state=42)
+
+print("\nSimple Random Sampling:")
+print(random_sample["Species"].value_counts())
+
+# Stratified sampling
+stratified_sample, remaining = train_test_split(
+    df,
+    train_size=30,
+    stratify=df["Species"],
+    random_state=42
+)
+
+print("\nStratified Sampling:")
+print(stratified_sample["Species"].value_counts())
+
+# Compare sample distributions
+comparison = pd.DataFrame({
+    "Original %": df["Species"].value_counts(normalize=True) * 100,
+    "Random %": random_sample["Species"].value_counts(normalize=True) * 100,
+    "Stratified %": stratified_sample["Species"].value_counts(normalize=True) * 100
+})
+
+print("\nSampling Comparison:")
+print(comparison.round(2))
+```
+
+## STEP 3: EXECUTE THE PROGRAM IN CMD
+
+py sampling.py
+
+## EXPECTED OUTPUT
+
+Original Dataset:
+setosa        50
+versicolor    50
+virginica     50
+
+Simple Random Sampling:
+30 randomly selected records.
+Class counts may differ.
+
+Stratified Sampling:
+setosa        10
+versicolor    10
+virginica     10
+
+Sampling Comparison:
+Original:   33.33% each class
+Random:     Class proportions may vary
+Stratified: 33.33% each class
+
+## IMPORTANT FUNCTIONS
+
+sample()           - Selects random records.
+train_test_split() - Splits the dataset.
+stratify           - Preserves class proportions.
+value_counts()     - Counts occurrences of each class.
+normalize=True     - Calculates class proportions.
+random_state=42    - Makes results reproducible.
+
+## RESULT
+
+Successfully implemented simple random sampling and
+stratified sampling and compared the class distributions
+of the resulting samples.
