@@ -1,0 +1,96 @@
+
+# EXPERIMENT 9: K-NEAREST NEIGHBORS (KNN)
+
+## AIM
+Apply KNN classification with k = 5 and display
+accuracy and the confusion matrix.
+
+## REQUIRED LIBRARIES
+- scikit-learn
+
+## STEP 1: INSTALL LIBRARY IN CMD
+
+python -m pip install scikit-learn
+
+## STEP 2: CREATE PYTHON FILE
+
+notepad knn.py
+
+Save the following code in the file:
+
+## PYTHON CODE
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+# Load Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Scale features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Create KNN model with k=5
+model = KNeighborsClassifier(n_neighbors=5)
+
+# Train model
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+# Evaluate model
+accuracy = accuracy_score(y_test, y_pred)
+cm = confusion_matrix(y_test, y_pred)
+
+# Display results
+print("K Value: 5")
+print("Accuracy:", accuracy)
+print("\nConfusion Matrix:")
+print(cm)
+```
+
+## STEP 3: EXECUTE PROGRAM IN CMD
+
+python knn.py
+
+## EXPECTED OUTPUT
+
+1. K value = 5.
+2. Accuracy score.
+3. Confusion matrix (3 x 3).
+
+The confusion matrix represents the three Iris classes:
+0 = Setosa
+1 = Versicolor
+2 = Virginica
+
+## IMPORTANT FUNCTIONS
+
+load_iris()          - Loads Iris dataset.
+train_test_split()   - Splits dataset.
+StandardScaler()     - Standardizes features.
+KNeighborsClassifier()- Creates KNN classifier.
+n_neighbors=5        - Uses 5 nearest neighbors.
+fit()                - Fits the model.
+predict()            - Predicts class labels.
+accuracy_score()     - Calculates accuracy.
+confusion_matrix()   - Evaluates class predictions.
+
+## RESULT
+
+Successfully implemented KNN classification
+using k = 5 and evaluated the model using
+accuracy and the confusion matrix.
