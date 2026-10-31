@@ -1,0 +1,90 @@
+
+# EXPERIMENT 2: DATA PREPROCESSING
+
+## AIM
+Handle missing values, encode categorical variables,
+and scale numerical features using StandardScaler.
+
+## REQUIRED LIBRARIES
+- pandas
+- scikit-learn
+
+## STEP 1: INSTALL LIBRARIES IN CMD
+
+py -m pip install pandas scikit-learn
+
+## STEP 2: CREATE PYTHON FILE
+
+notepad preprocessing.py
+
+Save the following code in the file:
+
+## PYTHON CODE
+
+```python
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+
+# Create sample dataset
+data = {
+    "Age": [20, 22, None, 24, 26],
+    "Salary": [20000, None, 30000, 40000, 50000],
+    "City": ["Pune", "Mumbai", "Pune", None, "Mumbai"]
+}
+
+df = pd.DataFrame(data)
+
+print("Original Dataset:")
+print(df)
+
+# Handle missing numerical values
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+df["Salary"] = df["Salary"].fillna(df["Salary"].mean())
+
+# Handle missing categorical values
+df["City"] = df["City"].fillna(df["City"].mode()[0])
+
+print("\nAfter Handling Missing Values:")
+print(df)
+
+# Encode categorical variables
+df = pd.get_dummies(df, columns=["City"], dtype=int)
+
+print("\nAfter Encoding:")
+print(df)
+
+# Standardize numerical features
+scaler = StandardScaler()
+df[["Age", "Salary"]] = scaler.fit_transform(
+    df[["Age", "Salary"]]
+)
+
+print("\nFinal Preprocessed Dataset:")
+print(df)
+```
+
+## STEP 3: EXECUTE THE PROGRAM IN CMD
+
+py preprocessing.py
+
+## EXPECTED OUTPUT
+
+1. Original dataset with missing values.
+2. Dataset after handling missing values.
+3. Dataset after encoding categorical variables.
+4. Final dataset with standardized numerical features.
+
+## IMPORTANT FUNCTIONS
+
+fillna()        - Replaces missing values.
+mean()          - Calculates the average value.
+mode()          - Finds the most frequent value.
+get_dummies()   - Converts categories into numerical columns.
+StandardScaler  - Standardizes numerical features.
+fit_transform() - Fits and applies feature scaling.
+
+## RESULT
+
+Successfully handled missing values, encoded categorical
+variables, and standardized numerical features using
+StandardScaler.
