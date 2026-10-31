@@ -1,0 +1,100 @@
+
+# EXPERIMENT 5: HYPOTHESIS TESTING USING t-TEST
+
+## AIM
+Perform an independent two-sample t-test and interpret
+the p-value at a 5% significance level.
+
+## REQUIRED LIBRARIES
+- numpy
+- scipy
+
+## STEP 1: INSTALL LIBRARIES IN CMD
+
+python -m pip install numpy scipy
+
+## STEP 2: CREATE PYTHON FILE
+
+notepad t_test.py
+
+Save the following code in the file:
+
+## PYTHON CODE
+
+```python
+import numpy as np
+from scipy.stats import ttest_ind
+
+# Create two independent samples
+group1 = np.array([72, 75, 78, 74, 76, 73, 77, 79, 75, 74])
+group2 = np.array([65, 68, 70, 66, 69, 67, 71, 64, 68, 66])
+
+# Calculate group means
+print("Group 1 Mean:", np.mean(group1))
+print("Group 2 Mean:", np.mean(group2))
+
+# Perform independent two-sample t-test
+t_stat, p_value = ttest_ind(group1, group2, equal_var=False)
+
+print("T-statistic:", t_stat)
+print("P-value:", p_value)
+
+# Significance level
+alpha = 0.05
+
+# Interpret result
+if p_value < alpha:
+    print("Reject Null Hypothesis")
+    print("Significant difference between the groups")
+else:
+    print("Fail to Reject Null Hypothesis")
+    print("No statistically significant difference found")
+```
+
+## STEP 3: EXECUTE PROGRAM IN CMD
+
+python t_test.py
+
+## EXPECTED OUTPUT
+
+Group 1 Mean: 75.3
+Group 2 Mean: 67.4
+T-statistic: Approximately 7.97
+P-value: Approximately 0.00000026
+
+Reject Null Hypothesis
+Significant difference between the groups
+
+## HYPOTHESES
+
+H0 (Null Hypothesis):
+The population means of both groups are equal.
+
+H1 (Alternative Hypothesis):
+The population means of both groups are different.
+
+## DECISION RULE
+
+If p-value < 0.05:
+    Reject H0.
+    There is a statistically significant difference.
+
+If p-value >= 0.05:
+    Fail to reject H0.
+    There is insufficient evidence of a difference.
+
+## IMPORTANT FUNCTIONS
+
+np.array()    - Creates a numerical array.
+np.mean()     - Calculates the group mean.
+ttest_ind()   - Performs independent two-sample t-test.
+equal_var=False - Uses Welch's t-test.
+alpha = 0.05  - Sets 5% significance level.
+
+## RESULT
+
+Successfully performed an independent two-sample
+t-test. Since the p-value is less than 0.05,
+the null hypothesis is rejected, indicating a
+statistically significant difference between
+the two groups.
