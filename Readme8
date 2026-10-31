@@ -1,0 +1,109 @@
+
+# EXPERIMENT 8: LOGISTIC REGRESSION CLASSIFICATION
+
+## AIM
+Train a logistic regression classifier and display
+accuracy, confusion matrix, precision, recall,
+and F1-score.
+
+## REQUIRED LIBRARIES
+- scikit-learn
+
+## STEP 1: INSTALL LIBRARY IN CMD
+
+python -m pip install scikit-learn
+
+## STEP 2: CREATE PYTHON FILE
+
+notepad logistic_regression.py
+
+Save the following code in the file:
+
+## PYTHON CODE
+
+```python
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+# Load dataset
+data = load_breast_cancer()
+X = data.data
+y = data.target
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Scale features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Train logistic regression model
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+# Calculate evaluation metrics
+accuracy = accuracy_score(y_test, y_pred)
+cm = confusion_matrix(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+# Display results
+print("Accuracy:", accuracy)
+print("\nConfusion Matrix:")
+print(cm)
+print("\nPrecision:", precision)
+print("Recall:", recall)
+print("F1 Score:", f1)
+```
+
+## STEP 3: EXECUTE PROGRAM IN CMD
+
+python logistic_regression.py
+
+## EXPECTED OUTPUT
+
+1. Accuracy score.
+2. Confusion matrix (2 x 2).
+3. Precision score.
+4. Recall score.
+5. F1-score.
+
+NOTE:
+The dataset contains two classes:
+0 = Malignant
+1 = Benign
+
+Precision, recall, and F1-score are calculated
+for class 1 (Benign) by default.
+
+## IMPORTANT FUNCTIONS
+
+load_breast_cancer()  - Loads classification dataset.
+train_test_split()    - Splits dataset.
+StandardScaler()      - Standardizes features.
+LogisticRegression()  - Creates classification model.
+fit()                 - Trains the model.
+predict()             - Predicts class labels.
+accuracy_score()      - Calculates accuracy.
+confusion_matrix()    - Displays prediction results.
+precision_score()     - Calculates precision.
+recall_score()        - Calculates recall.
+f1_score()            - Calculates F1-score.
+
+## RESULT
+
+Successfully trained a logistic regression
+classification model and evaluated its performance
+using accuracy, confusion matrix, precision,
+recall, and F1-score.
