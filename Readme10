@@ -1,0 +1,102 @@
+
+# EXPERIMENT 10: PCA AND K-MEANS CLUSTERING
+
+## AIM
+Apply Principal Component Analysis (PCA) to reduce
+data to two dimensions, perform K-Means clustering,
+and visualize the clusters.
+
+## REQUIRED LIBRARIES
+- scikit-learn
+- matplotlib
+
+## STEP 1: INSTALL LIBRARIES IN CMD
+
+python -m pip install scikit-learn matplotlib
+
+## STEP 2: CREATE PYTHON FILE
+
+notepad pca_kmeans.py
+
+Save the following code in the file:
+
+## PYTHON CODE
+
+```python
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
+
+# Load Iris dataset
+iris = load_iris()
+X = iris.data
+
+# Standardize the data
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Apply PCA to reduce to 2 dimensions
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+# Apply K-Means clustering
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+clusters = kmeans.fit_predict(X_pca)
+
+# Display results
+print("Original Shape:", X.shape)
+print("Reduced Shape:", X_pca.shape)
+print("Cluster Labels:")
+print(clusters)
+
+# Visualize clusters
+plt.scatter(X_pca[:, 0], X_pca[:, 1],
+            c=clusters, cmap="viridis")
+
+plt.xlabel("Principal Component 1")
+plt.ylabel("Principal Component 2")
+plt.title("PCA and K-Means Clustering")
+plt.colorbar(label="Cluster")
+plt.show()
+```
+
+## STEP 3: EXECUTE PROGRAM IN CMD
+
+python pca_kmeans.py
+
+## EXPECTED OUTPUT
+
+Original Shape: (150, 4)
+Reduced Shape: (150, 2)
+
+Cluster Labels:
+An array containing cluster labels 0, 1, and 2.
+
+GRAPH OUTPUT:
+A 2D scatter plot showing three colored clusters.
+
+NOTE:
+Cluster labels are assigned by K-Means and
+do not necessarily match the original Iris species.
+
+## IMPORTANT FUNCTIONS
+
+load_iris()       - Loads Iris dataset.
+StandardScaler()  - Standardizes numerical features.
+PCA()             - Performs dimensionality reduction.
+n_components=2    - Reduces data to two dimensions.
+fit_transform()   - Fits and transforms data.
+KMeans()          - Creates the clustering model.
+n_clusters=3      - Creates three clusters.
+fit_predict()     - Fits model and predicts clusters.
+plt.scatter()     - Plots clusters on a scatter plot.
+plt.colorbar()    - Displays cluster color scale.
+plt.show()        - Displays the graph.
+
+## RESULT
+
+Successfully reduced the Iris dataset from four
+dimensions to two using PCA, applied K-Means
+clustering, and visualized the resulting clusters.
