@@ -1,0 +1,87 @@
+
+# EXPERIMENT 6: BOOTSTRAP CONFIDENCE INTERVAL
+
+## AIM
+Generate bootstrap samples for a numerical variable
+and calculate a 95% confidence interval for its mean.
+
+## REQUIRED LIBRARY
+- numpy
+
+## STEP 1: INSTALL LIBRARY IN CMD
+
+python -m pip install numpy
+
+## STEP 2: CREATE PYTHON FILE
+
+notepad bootstrap.py
+
+Save the following code in the file:
+
+## PYTHON CODE
+
+```python
+import numpy as np
+
+# Create numerical dataset
+data = np.array([22, 25, 28, 30, 24, 27, 29, 26, 31, 23])
+
+# Set random seed
+np.random.seed(42)
+
+# Generate bootstrap samples
+bootstrap_means = []
+
+for i in range(1000):
+    sample = np.random.choice(data, size=len(data), replace=True)
+    bootstrap_means.append(np.mean(sample))
+
+# Calculate 95% confidence interval
+lower = np.percentile(bootstrap_means, 2.5)
+upper = np.percentile(bootstrap_means, 97.5)
+
+# Display results
+print("Original Mean:", np.mean(data))
+print("95% Confidence Interval:")
+print("Lower Limit:", lower)
+print("Upper Limit:", upper)
+```
+
+## STEP 3: EXECUTE PROGRAM IN CMD
+
+python bootstrap.py
+
+## EXPECTED OUTPUT
+
+Original Mean: 26.5
+
+95% Confidence Interval:
+
+Lower Limit: Approximately 24.80
+Upper Limit: Approximately 28.10
+
+## IMPORTANT FUNCTIONS
+
+np.array()       - Creates a numerical array.
+np.random.seed() - Makes results reproducible.
+np.random.choice()- Draws random bootstrap samples.
+len()            - Returns number of data values.
+replace=True     - Allows repeated selection of values.
+np.mean()        - Calculates sample mean.
+np.percentile()  - Calculates confidence interval limits.
+
+## WORKING
+
+1. Create a numerical dataset.
+2. Generate 1000 bootstrap samples.
+3. Each sample has the same size as the original data.
+4. Sampling is performed with replacement.
+5. Calculate the mean of each bootstrap sample.
+6. Find the 2.5th and 97.5th percentiles.
+7. These form the 95% bootstrap confidence interval.
+
+## RESULT
+
+Successfully implemented bootstrap sampling and
+calculated a 95% confidence interval for the
+population mean using the percentile method.
